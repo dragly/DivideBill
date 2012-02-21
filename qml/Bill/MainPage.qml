@@ -275,8 +275,8 @@ Page {
             for(var j = 0; j < payments.count; j++) {
                 var payment = parseFloat(payments.get(j).paymentValue)
                 var paymentTip = tipPercent / 100 * payment
-                person.personTip = paymentTip
-                person.personTotal = payment + paymentTip
+                person.personTip += paymentTip
+                person.personTotal += payment + paymentTip
                 totalSum += payment
             }
             console.log(personListModel.get(i).name)
