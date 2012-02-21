@@ -59,6 +59,12 @@ Item {
                             calculate()
                         }
                     }
+                    Keys.onReturnPressed: {
+                        payments.set(index, {paymentValue: text})
+                        calculate()
+                        platformCloseSoftwareInputPanel()
+                        focus = false
+                    }
                 }
                 Button {
                     id: removeButton
@@ -75,20 +81,32 @@ Item {
         }
     }
     Label {
-        id: tipCalculatedText
-        text: "Tip: " + personTip.toFixed(1)
+        id: tipCalculatedLabel
+        text: "Total + tip: "
         anchors {
-            verticalCenter: addPaymentButton.verticalCenter
-            left: parent.left
+            top: addPaymentButton.top
+            right: tipCalculatedSumLabel.left
+            rightMargin: 20
         }
     }
     Label {
-        text: "Total: " + personTotal.toFixed(1)
+        id: tipCalculatedSumLabel
+        text: personTotalAndTip.toFixed(1)
         anchors {
-            verticalCenter: addPaymentButton.verticalCenter
+            top: tipCalculatedLabel.top
             left: columnDelegate.left
+            leftMargin: 20
         }
     }
+//    Label {
+//        id: totalLabel
+//        text: "Total: " + personTotal.toFixed(1)
+//        anchors {
+//            top: addPaymentButton.top
+//            left: columnDelegate.left
+//            leftMargin: -30
+//        }
+//    }
     Button {
         id: addPaymentButton
         text: "+"
@@ -105,4 +123,12 @@ Item {
             paymentRepeater.itemAt(paymentRepeater.count-1).children[0].selectAll()
         }
     }
+
+//    Label {
+//        text: "Total + tip: " + personTotalAndTip.toFixed(1)
+//        anchors {
+//            top: totalLabel.bottom
+//            left: totalLabel.left
+//        }
+//    }
 }
