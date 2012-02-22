@@ -1,5 +1,4 @@
-bill (0.0.1) unstable; urgency=low
+split-that-bill (1.0.0) unstable; urgency=low
+  * First version
 
-  * Initial Release.
-
- -- Svenn-Arne <svenni@unknown>  Mon, 20 Feb 2012 01:04:22 +0100
+ -- Svenn-Arne <svenni@unknown>  Wed, 22 Feb 2012 12:34:26 +0100

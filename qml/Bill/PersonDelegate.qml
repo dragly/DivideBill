@@ -1,13 +1,21 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import "constants.js" as UI
+import "helpers.js" as Helpers
 
 Item {
     id: delegateItem
 
     width: parent.width
-    height: 75 + payments.count * 70
+    height:  65 + model.payments.count * 70 + UI.LIST_LAST_ELEMENT
     anchors.margins: 20
+    Item {
+        id: spacer
+        anchors.top: parent.top
+        height: UI.DEFAULT_MARGIN
+    }
+
     Label {
         id: nameLabel
         text: model.name + ":"
@@ -16,7 +24,7 @@ Item {
         font.pixelSize: 30
 
         anchors  {
-            top: parent.top
+            top: spacer.bottom
             topMargin: 5
             left: parent.left
         }
@@ -38,7 +46,7 @@ Item {
     Column {
         id: columnDelegate
         anchors {
-            top: parent.top
+            top: spacer.bottom
             right: parent.right
         }
         spacing: 10
@@ -48,20 +56,25 @@ Item {
             model: payments
             Row {
                 spacing: 10
-                TextField {
+                TextFieldZero {
                     id: paymentField
                     width: delegateItem.width / 2 - removeButton.width - parent.spacing
                     text: model.paymentValue
                     inputMethodHints: Qt.ImhFormattedNumbersOnly
                     onActiveFocusChanged: {
-                        if(!focus) {
+                        if(!activeFocus) {
                             payments.set(index, {paymentValue: text})
-                            calculate()
+                            mainPage.calculatePayments()
                         }
                     }
+                    onTextChanged: {
+                        payments.set(index, {paymentValue: text})
+                        mainPage.calculatePayments()
+                    }
+
                     Keys.onReturnPressed: {
                         payments.set(index, {paymentValue: text})
-                        calculate()
+                        mainPage.calculatePayments()
                         platformCloseSoftwareInputPanel()
                         focus = false
                     }
@@ -74,29 +87,55 @@ Item {
 
                     onClicked: {
                         payments.remove(index)
-                        calculate()
+                        mainPage.calculatePayments()
                     }
                 }
             }
         }
     }
     Label {
-        id: tipCalculatedLabel
-        text: "Total + tip: "
+        id: tipLabel
+        text: "Tip: "
         anchors {
-            top: addPaymentButton.top
-            right: tipCalculatedSumLabel.left
+            top: columnDelegate.bottom
+            right: totalAndTipSumLabel.left
             rightMargin: 20
         }
+        font.pixelSize: mainPage.smallPixelSize
+        color: mainPage.mildColor
     }
     Label {
-        id: tipCalculatedSumLabel
-        text: personTotalAndTip.toFixed(1)
+        id: tipSumLabel
+        text: Helpers.rounded(personTip)
         anchors {
-            top: tipCalculatedLabel.top
+            top: tipLabel.top
             left: columnDelegate.left
             leftMargin: 20
         }
+        font.pixelSize: mainPage.smallPixelSize
+        color: mainPage.mildColor
+    }
+    Label {
+        id: totalAndTipLabel
+        text: "Total + tip: "
+        anchors {
+            top: tipLabel.bottom
+            right: totalAndTipSumLabel.left
+            rightMargin: 20
+        }
+        font.pixelSize: mainPage.smallPixelSize
+        color: selectedColor
+    }
+    Label {
+        id: totalAndTipSumLabel
+        text: Helpers.rounded(personTotalAndTip)
+        anchors {
+            top: totalAndTipLabel.top
+            left: columnDelegate.left
+            leftMargin: 20
+        }
+        font.pixelSize: mainPage.smallPixelSize
+        color: selectedColor
     }
 //    Label {
 //        id: totalLabel
@@ -121,6 +160,15 @@ Item {
             payments.append({paymentValue: 0})
             paymentRepeater.itemAt(paymentRepeater.count-1).children[0].forceActiveFocus()
             paymentRepeater.itemAt(paymentRepeater.count-1).children[0].selectAll()
+        }
+    }
+
+    LineSeparator {
+        anchors {
+            top: addPaymentButton.bottom
+            topMargin: UI.DEFAULT_MARGIN / 2
+            left: parent.left
+            right: parent.right
         }
     }
 

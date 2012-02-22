@@ -1,23 +1,17 @@
-This package was debianized by Svenn-Arne <svenni@unknown> on
+This package was debianized by Svenn-Arne Dragly s@dragly.com on
 Mon, 20 Feb 2012 01:04:22 +0100.
 
-It was downloaded from <url://example.com>
-
-Upstream Author(s):
-
-    <put author's name and email here>
-    <likewise for another author>
+It was downloaded from Nokia Store
 
 Copyright:
 
-    <Copyright (C) YYYY Name OfAuthor>
-    <likewise for another author>
+    Copyright (C) 2012 Svenn-Arne Dragly
 
 License:
 
     This package is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
+    the Free Software Foundation; either version 3 of the License, or
     (at your option) any later version.
 
     This package is distributed in the hope that it will be useful,
@@ -32,9 +26,5 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
 
-The Debian packaging is (C) 2012, Svenn-Arne <svenni@unknown> and
+The Debian packaging is (C) 2012, Svenn-Arne Dragly <s@dragly.com> and
 is licensed under the GPL, see above.
-
-
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.

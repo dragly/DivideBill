@@ -10,6 +10,19 @@ PageStackWindow {
         id: mainPage
     }
 
+    //    initialPage: Page {
+    //        Label {
+    //            anchors.centerIn: parent
+    //            text: "Loading..."
+    //        }
+    //    }
+
+    //    Component.onCompleted: {
+    //        // Wait till the page stack is loaded
+    //        console.log("Page stack loaded")
+    //        pageStack.push(Qt.resolvedUrl("MainPage.qml"))
+    //    }
+
 //    ToolBarLayout {
 //        id: commonTools
 //        visible: true
